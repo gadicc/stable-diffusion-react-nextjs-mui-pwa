@@ -19,6 +19,7 @@ interface User {
   stripeCustomerId: string;
   redeemedCreditCodes: string[];
   username?: string;
+  admin?: boolean;
 }
 
 export type { User };

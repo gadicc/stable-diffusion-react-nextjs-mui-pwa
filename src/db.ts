@@ -60,7 +60,7 @@ db.collection("userProfiles").persist();
 db.collection("history", { isLocalCollection: true }).persist();
 
 declare module "gongo-client" {
-  class Database {
+  interface Database {
     collection(name: "users"): Collection<User>;
     collection(name: "orders"): Collection<Order>;
     collection(name: "creditCodes"): Collection<CreditCode>;
