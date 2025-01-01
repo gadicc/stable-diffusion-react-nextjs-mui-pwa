@@ -18,6 +18,7 @@ import { outputImageQueue } from "./lib/sendQueue";
 import fetchToOutput from "./lib/fetchToOutput";
 import { ddaCallInputs, ddaModelInputs } from "./schemas";
 import InputImage, { useInputImage } from "./InputImage";
+import { signIn } from "next-auth/react";
 
 // Border around inImg{Canvas,Mask}, useful in dev
 const DRAW_BORDERS = false;
@@ -293,7 +294,7 @@ export default function Inpainting() {
 
     if (REQUIRE_REGISTRATION) {
       // TODO, record state in URL, e.g. #prompt=,etc
-      if (!user) return router.push("/login?from=/inpaint");
+      if (!user) return signIn();
       if (!(user.credits.free > 0 || user.credits.paid > 0))
         return router.push("/credits");
     }

@@ -5,6 +5,7 @@ import { useGongoUserId } from "gongo-client-react";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe, Stripe } from "@stripe/stripe-js";
 import CheckoutForm from "../src/CheckoutForm";
+import { signIn } from "next-auth/react";
 
 import { Container, Typography } from "@mui/material";
 
@@ -44,7 +45,7 @@ export default function Checkout() {
   }
 
   if (!userId) {
-    router.push("/login?from=/checkout");
+    signIn();
     return null;
   }
 

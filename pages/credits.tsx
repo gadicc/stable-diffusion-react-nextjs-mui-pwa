@@ -29,6 +29,7 @@ import MyAppBar from "../src/MyAppBar";
 import Link from "../src/Link";
 import type { User } from "../src/schemas";
 import { DAILY_FREE_CREDITS, MIN_PAID_CREDITS } from "../src/config/constants";
+import { signIn } from "next-auth/react";
 
 function intOrFixedOneStr(num: number) {
   if (num && !Number.isInteger(num)) return num.toFixed(1);
@@ -127,7 +128,7 @@ export default function Credits() {
   if (!isPopulated) return <div>Loading...</div>;
 
   if (!userId) {
-    router.push("/login?from=/credits");
+    signIn();
     return null;
   }
 

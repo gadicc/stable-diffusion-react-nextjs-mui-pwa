@@ -12,6 +12,7 @@ import { Button, Container, Typography } from "@mui/material";
 
 import MyAppBar from "../../src/MyAppBar";
 import Link from "../../src/Link";
+import { signIn } from "next-auth/react";
 
 export default function OrderId() {
   const router = useRouter();
@@ -38,7 +39,7 @@ export default function OrderId() {
   if (!isPopulated) return <div>Loading...</div>;
 
   if (!userId) {
-    router.push("/login?from=" + location.href);
+    signIn();
     return null;
   }
 

@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import { Box, Button, Container } from "@mui/material";
 
 import { /* isDev, */ REQUIRE_REGISTRATION } from "./lib/client-env";
+import { signIn } from "next-auth/react";
 
 export default function GoButton({
   disabled,
@@ -33,7 +34,7 @@ export default function GoButton({
     if (REQUIRE_REGISTRATION) {
       if (!user) {
         event.preventDefault();
-        return router.push("/login?from" + location.pathname);
+        return signIn();
       }
       if (!enoughCredits) {
         event.preventDefault();

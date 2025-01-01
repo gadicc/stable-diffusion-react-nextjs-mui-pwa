@@ -6,7 +6,6 @@ import {
   useGongoIsPopulated,
   useGongoLive,
 } from "gongo-client-react";
-import { useRouter } from "next/router";
 
 import {
   Container,
@@ -22,6 +21,7 @@ import {
 
 import MyAppBar from "../src/MyAppBar";
 import Link from "../src/Link";
+import { signIn } from "next-auth/react";
 
 export default function Orders() {
   useGongoSub("orders", {});
@@ -30,12 +30,10 @@ export default function Orders() {
   const orders = useGongoLive((db) =>
     db.collection("orders").find().sort("createdAt", "desc")
   );
-  const router = useRouter();
-
   if (!isPopulated) return <div>Loading...</div>;
 
   if (!userId) {
-    router.push("/login?from=" + location.href);
+    signIn();
     return null;
   }
 

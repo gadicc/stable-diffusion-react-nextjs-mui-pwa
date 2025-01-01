@@ -1,6 +1,7 @@
 import { t } from "@lingui/macro";
 import { useGongoUserId, useGongoOne } from "gongo-client-react";
 import { useRouter } from "next/router";
+import { signIn } from "next-auth/react";
 
 import { REQUIRE_REGISTRATION } from "../src/lib/client-env";
 import useModelState, {
@@ -66,7 +67,7 @@ export default function Txt2Img() {
 
     if (REQUIRE_REGISTRATION) {
       // TODO, record state in URL, e.g. #prompt=,etc
-      if (!user) return router.push("/login?from=/txt2img");
+      if (!user) return signIn();
       if (!(user.credits.free > 0 || user.credits.paid > 0))
         return router.push("/credits");
     }

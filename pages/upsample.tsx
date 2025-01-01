@@ -7,6 +7,7 @@ import {
   upsampleCallInputsSchema,
   upsampleModelInputsSchema,
 } from "../src/schemas";
+import { signIn } from "next-auth/react";
 
 import {
   Box,
@@ -279,8 +280,8 @@ export default function Upsample() {
     event.preventDefault();
 
     if (REQUIRE_REGISTRATION) {
-      // TODO, record state in URL, e.g. #prompt=,etc
-      if (!user) return router.push("/login?from=/txt2img");
+      // [TODO, record state in URL, e.g. #prompt=,etc]  maybe working now with signIn?
+      if (!user) return signIn();
       if (!(user.credits.free > CREDIT_COST || user.credits.paid > CREDIT_COST))
         return router.push("/credits");
     }
